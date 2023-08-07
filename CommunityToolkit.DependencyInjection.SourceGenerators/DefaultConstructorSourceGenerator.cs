@@ -5,18 +5,13 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace CommunityToolkit.DependencyInjection;
+namespace CommunityToolkit.DependencyInjection.SourceGenerators;
 
 [Generator]
 public class DefaultConstructorSourceGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // TODO: Add the marker interface dynamically. This is somewhat problematic if used in multiple projects as it will produce 2 clashing types (same name and namespace in different assemblies)
-        context.RegisterPostInitializationOutput(ctx => ctx.AddSource(
-            "InjectDependenciesFromDefaultConstructorAttribute.g.cs",
-            SourceText.From(SourceGenerationUtil.Attribute, Encoding.UTF8)));
-
         IncrementalValuesProvider<DependencyInjectionTypeDeclaration?> typeDeclarations = context.SyntaxProvider
             .CreateSyntaxProvider(
                 predicate: static (s, _) => IsSyntaxTargetForGeneration(s),
@@ -50,7 +45,7 @@ public class DefaultConstructorSourceGenerator : IIncrementalGenerator
                 INamedTypeSymbol attributeContainingTypeSymbol = attributeTypeSymbol.ContainingType;
                 string fullName = attributeContainingTypeSymbol.ToDisplayString();
 
-                if (fullName == SourceGenerationUtil.AttributeFullName
+                if (fullName.EndsWith(nameof(InjectDependenciesFromDefaultConstructorAttribute))
                     && syntax.Members.OfType<ConstructorDeclarationSyntax>().FirstOrDefault(c => c.ParameterList.Parameters.Any()) is { } diConstructor)
                 {
                     return new DependencyInjectionTypeDeclaration(

@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace CommunityToolkit.DependencyInjection;
+namespace CommunityToolkit.DependencyInjection.SourceGenerators;
 
 /// <summary>
 /// Represents a type for which we should source-generate a default constructor and inject the dependencies

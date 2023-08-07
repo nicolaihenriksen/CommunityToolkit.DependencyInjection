@@ -40,6 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CommunityToolkit.DependencyInjection\CommunityToolkit.DependencyInjection.csproj" />
     <ProjectReference Include="..\CommunityToolkit.DependencyInjection.SourceGenerators\CommunityToolkit.DependencyInjection.SourceGenerators.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
 </Project>

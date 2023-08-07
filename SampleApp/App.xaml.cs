@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using System.Windows;
 using System.Windows.Threading;
 
+using CommunityToolkit.DependencyInjection;
+
 namespace SampleApp;
 
 /// <summary>
@@ -16,7 +18,7 @@ public partial class App : Application
     [STAThread]
     public static void Main(string[] args)
     {
-        using IHost host = CreateHostBuilder(args).Build();
+        using IHost host = CreateHostBuilder(args).BuildWithSourceGeneratedDefaultConstructors();
         host.Start();
 
         App app = new();
@@ -34,6 +36,7 @@ public partial class App : Application
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
+            services.AddTransient<MyUserControlViewModel>();
 
             services.AddSingleton<WeakReferenceMessenger>();
             services.AddSingleton<IMessenger, WeakReferenceMessenger>(provider => provider.GetRequiredService<WeakReferenceMessenger>());
