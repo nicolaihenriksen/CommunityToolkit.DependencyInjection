@@ -7,7 +7,7 @@ time to help provide some valuable feedback. I can also grant you write-access t
 
 ## Problem to solve
 Consider a simple WPF application using the `GenericHost` to enable dependency injection following the standard scheme.
-The approach is nicely described in [this video](https://www.youtube.com/watch?v=j3pl2tkBM1A&t=6s) by @keboo.
+The approach is nicely described in [this video](https://www.youtube.com/watch?v=j3pl2tkBM1A&t=6s) by [@keboo](https://github.com/Keboo).
 
 This allows us to extract the "top-most" view from the DI container, however, nested controls inside this view are problematic
 because they are instantiated by the "XAML parser" and thus require an empty default constructor.
