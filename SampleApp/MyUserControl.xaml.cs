@@ -1,15 +1,21 @@
-﻿using System.Windows.Controls;
+﻿using CommunityToolkit.DependencyInjection;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace SampleApp;
 
 /// <summary>
 /// Interaction logic for MyUserControl.xaml
 /// </summary>
-public partial class MyUserControl : UserControl
+[InjectDependenciesFromDefaultConstructor]
+public partial class MyUserControl
 {
-    public MyUserControl()
+    public IMessenger Messenger { get; }
+
+    public MyUserControl(MyUserControlViewModel viewModel, IMessenger messenger)
     {
-        DataContext = new MyUserControlViewModel();
+        DataContext = viewModel;
+        Messenger = messenger;
+
         InitializeComponent();
     }
 }

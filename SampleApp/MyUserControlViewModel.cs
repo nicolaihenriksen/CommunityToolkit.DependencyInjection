@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace SampleApp;
 
-internal partial class MyUserControlViewModel : ObservableObject
+public partial class MyUserControlViewModel : ObservableObject
 {
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(DecrementCountCommand))]
