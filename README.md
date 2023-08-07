@@ -2,7 +2,7 @@
 Eventually I hope this can be matured enough that I can convert it into an actual pull request into the CommunityToolkit repo.
 
 **To Kevin:**
-For now, it is a private repo which I have shared with you in order to mature it. I hope you see the benefit in this, and have
+I reached out to you on Discord regarding this, I hope you saw it. For now, it is a private repo which I have shared with you in order to mature it. I hope you see the benefit in this, and have
 time to help provide some valuable feedback. I can also grant you write-access to the repo so you can work on it directly if you want.
 
 ## Problem to solve
