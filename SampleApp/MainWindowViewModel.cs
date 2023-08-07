@@ -12,11 +12,6 @@ public partial class MainWindowViewModel : ObservableObject
     [NotifyCanExecuteChangedFor(nameof(IncrementCountCommand))]
     private int _count;
     
-    public MainWindowViewModel()
-    {
-        
-    }
-
     //This is using the source generators from CommunityToolkit.Mvvm to generate a RelayCommand
     //See: https://learn.microsoft.com/dotnet/communitytoolkit/mvvm/generators/relaycommand
     //and: https://learn.microsoft.com/windows/communitytoolkit/mvvm/relaycommand
