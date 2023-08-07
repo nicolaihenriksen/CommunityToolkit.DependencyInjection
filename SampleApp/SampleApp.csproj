@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -40,6 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommunityToolkit.DependencyInjection\CommunityToolkit.DependencyInjection.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\CommunityToolkit.DependencyInjection.SourceGenerators\CommunityToolkit.DependencyInjection.SourceGenerators.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
 </Project>
