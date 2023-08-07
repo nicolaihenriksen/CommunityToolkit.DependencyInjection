@@ -1,4 +1,6 @@
-﻿namespace CommunityToolkit.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace CommunityToolkit.DependencyInjection;
 
 public class ServiceProviderAccessor
 {
@@ -15,5 +17,13 @@ public class ServiceProviderAccessor
     public ServiceProviderAccessor(IServiceProvider serviceProvider, SourceGeneratorOptions options)
     {
         Initialize(serviceProvider, options);
+    }
+
+    public static T Resolve<T>() where T : notnull
+    {
+        if (ServiceProvider is null)
+            throw new InvalidOperationException("HostBuilder is not configured to use the 'CommunityToolkit.DependencyInjection' package. You need to call UseSourceGeneratedDefaultConstructors() on the host builder");
+
+        return ServiceProvider.GetRequiredService<T>();
     }
 }
