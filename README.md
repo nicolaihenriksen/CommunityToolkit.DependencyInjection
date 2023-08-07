@@ -3,7 +3,7 @@ Eventually I hope this can be matured enough that I can convert it into an actua
 
 **To Kevin:**
 For now, it is a private repo which I have shared with you in order to mature it. I hope you see the benefit in this, and have
-time to help provide some valuable feedback. I can also grant you access to the repo so you can work on it directly.
+time to help provide some valuable feedback. I can also grant you write-access to the repo so you can work on it directly if you want.
 
 ## Problem to solve
 Consider a simple WPF application using the `GenericHost` to enable dependency injection following the standard scheme.
@@ -71,8 +71,10 @@ I have never written an incremental source generator before, so this is a very n
 to be fast and effective. However, it does the job for the example I have provided, and showcases what the desired end result should be.
 
 ## Known issues
+- [ ] Naming is hard! Proposals for better named types are always welcome!
 - [ ] The `HostBuilderExtensions.UseSourceGeneratedDefaultConstructors()` does not work as desired. Kind of a "chicken and the egg" problem.
-  - Current work around is to use `HostBuilderExtensions.BuildWithSourceGeneratedDefaultConstructors()` (effectively replacing the `.Build()` call) instead which deviates for the standard way of using the `IHostBuilder`.
+  - Current workaround is to use `HostBuilderExtensions.BuildWithSourceGeneratedDefaultConstructors()` instead
+(effectively replacing the `.Build()` call), which deviates from the standard way of using the `IHostBuilder`.
 - [ ] The code assumes all services should be pulled from the "root scope" of the DI container.
 - [ ] The code assumes there is only ever one instance of the required services.
 
