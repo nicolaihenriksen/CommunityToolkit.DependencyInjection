@@ -18,7 +18,21 @@ public partial class App : Application
     [STAThread]
     public static void Main(string[] args)
     {
-        using IHost host = CreateHostBuilder(args).BuildWithSourceGeneratedDefaultConstructors();
+        // TODO: Ideally this is what I want
+        /*
+        using IHost host = CreateHostBuilder(args).UseSourceGeneratedDefaultConstructors(config =>
+            {
+                config.SomeOption = 42; // modify the configuration (if needed)
+            }
+        ).Build();
+        */
+
+        // TODO: Because the above does not work, I am using this workaround for now
+        using IHost host = CreateHostBuilder(args).BuildWithSourceGeneratedDefaultConstructors(config =>
+        {
+            config.SomeOption = 42; // modify the configuration (if needed)
+        });
+
         host.Start();
 
         App app = new();
