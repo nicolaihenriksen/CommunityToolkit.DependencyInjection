@@ -1,16 +1,15 @@
 ## Proposed addition to CommunityToolkit
-Eventually I hope this can be matured enough that I can convert it into an actual pull request into the CommunityToolkit repo.
+This repository illustrates a proof-of-concept of a feature which I hope could end up being part of the [.NET Community Toolkit](https://github.com/CommunityToolkit/dotnet).
 
-**To Kevin:**
-I reached out to you on Discord regarding this, I hope you saw it. For now, it is a private repo which I have shared with you in order to mature it. I hope you see the benefit in this, and have
-time to help provide some valuable feedback. I can also grant you write-access to the repo so you can work on it directly if you want.
 
 ## Problem to solve
-Consider a simple WPF application using the `GenericHost` to enable dependency injection following the standard scheme.
+The problem described below is probably the most compelling use case for this feature, however I do see other use cases for it as well.
+
+Consider a simple WPF application using the `GenericHost` to enable dependency injection following the standard .NET scheme.
 The approach is nicely described in [this video](https://www.youtube.com/watch?v=j3pl2tkBM1A&t=6s) by [@keboo](https://github.com/Keboo).
 
-This allows us to extract the "top-most" view from the DI container, however, nested controls inside this view are problematic
-because they are instantiated by the "XAML parser" and thus require an empty default constructor.
+This allows us to [extract the "top-most" view from the DI container](https://github.com/nicolaihenriksen/CommunityToolkit.DependencyInjection/blob/26eda98270d5d0393ea3a07613b6bcf165fd5b16/SampleApp/App.xaml.cs#L40) (and thus use a non-default constructor). However, nested controls inside this view are problematic,
+because they are "instantiated by the XAML parser" and thus require an empty default constructor.
 
 Consider a "top-most" view called `MainWindow` using a `UserControl` (or a custom control):
 
@@ -21,17 +20,17 @@ Consider a "top-most" view called `MainWindow` using a `UserControl` (or a custo
 </Window>
 ```
 
-We now want the nested view to have a non-default constructor so we can use dependency injection:
+We now want the nested view (i.e. `MyUserControl`) to have a non-default constructor so we can use dependency injection:
 
 **MyUserControl.xaml.cs** (code-behind)
 ```csharp
 public class MyUserControl : UserControl
 {
-  public IMessenger Messenger { get; }
+  private readonly IMessenger _messenger;
 
   public MyUserControl(IMessenger messenger) // This does not work out of the box - default ctor is needed!
   {
-    Messenger = messenger;
+    _messenger = messenger;
   }
 }
 ```
@@ -45,7 +44,7 @@ The general idea is quite simple:
 > Use an incremental source generator to create an empty default constructor which in turn invokes the DI-enabled constructor by looking up the dependencies in the DI container.
 
 For this to work, basically 2 things are needed:
-1. An incremental source generator producing the empty default constructor for types decorated with a marker attribute.
+1. An incremental source generator producing the empty default constructor for (partial) types decorated with a marker attribute.
 2. A means of getting (static) access to the `IServiceProvider` from the generated constructors in order to lookup the required services.
 
 #### Desired usage
@@ -67,7 +66,7 @@ using IHost host = CreateHostBuilder(args)
 ```
 
 ## Disclaimer
-I have never written an incremental source generator before, so this is a very naive approach and probably needs a lot of refactoring
+I have never written an incremental source generator before, so this is a very naive approach - heavily inspired by Andrew Locks [initial blog post](https://andrewlock.net/creating-a-source-generator-part-1-creating-an-incremental-source-generator/) - and probably needs a lot of refactoring
 to be fast and effective. However, it does the job for the example I have provided, and showcases what the desired end result should be.
 
 ## Known issues

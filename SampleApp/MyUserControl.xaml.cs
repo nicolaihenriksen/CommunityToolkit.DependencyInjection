@@ -9,12 +9,12 @@ namespace SampleApp;
 [InjectDependenciesFromDefaultConstructor]
 public partial class MyUserControl
 {
-    public IMessenger Messenger { get; }
+    private readonly IMessenger _messenger;
 
     public MyUserControl(MyUserControlViewModel viewModel, IMessenger messenger)
     {
         DataContext = viewModel;
-        Messenger = messenger;
+        _messenger = messenger;
 
         InitializeComponent();
     }
