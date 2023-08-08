@@ -9,12 +9,13 @@ internal static class SourceGenerationUtil
         return $$"""
 {{GetRequiredUsingStatements(typeDeclaration)}}
 
-namespace {{typeDeclaration.Namespace}};
-
-{{typeDeclaration.AccessModifier}} partial class {{typeDeclaration.ClassName}}
+namespace {{typeDeclaration.Namespace}}
 {
-    public {{typeDeclaration.ClassName}}() : this({{GetResolvedDependencies(typeDeclaration)}})
-    { }
+    {{typeDeclaration.AccessModifier}} partial class {{typeDeclaration.ClassName}}
+    {
+        public {{typeDeclaration.ClassName}}() : this({{GetResolvedDependencies(typeDeclaration)}})
+        { }
+    }
 }
 """;
     }
