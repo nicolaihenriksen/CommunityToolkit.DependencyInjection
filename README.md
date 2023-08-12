@@ -65,6 +65,9 @@ using IHost host = CreateHostBuilder(args)
                      .Build();
 ```
 
+The latter is currently an extension method on `IHostBuilder`, but should probably be an extension method on the `IServiceCollection` instead
+to follow the normal approach. However, the above keeps the example simpler.
+
 ## Disclaimer
 I have never written an incremental source generator before, so this is a very naive approach - heavily inspired by Andrew Locks [initial blog post](https://andrewlock.net/creating-a-source-generator-part-1-creating-an-incremental-source-generator/) - and probably needs a lot of refactoring
 to be fast and effective. However, it does the job for the example I have provided, and showcases what the desired end result should be.
