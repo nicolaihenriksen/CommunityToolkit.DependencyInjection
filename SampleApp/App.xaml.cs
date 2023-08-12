@@ -18,7 +18,7 @@ public partial class App : Application
     [STAThread]
     public static void Main(string[] args)
     {
-        // TODO: Ideally this is what I want
+        // TODO: Ideally this is what I want (kind of! Probably using services.UseSourceGeneratedDefaultConstructors() inside of CreateHostBuilder() is the ideal approach)
         /*
         using IHost host = CreateHostBuilder(args).UseSourceGeneratedDefaultConstructors(config =>
             {
